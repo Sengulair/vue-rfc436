@@ -1,20 +1,26 @@
-<script setup lang="ts" generic="T extends InputType">
-import { withDefaults } from 'vue'
-
+<script setup lang="ts">
 export type InputType = 'text' | 'number';
-
 type ReturnType<T extends InputType = 'text'> 
 	= T extends 'text' ? string : number;
 
-const props = withDefaults(defineProps<{ type: T }>(), { type: 'text' });
+type Props = {
+	type: InputType;
+	modelValue: ReturnType<InputType>;
+}
+
+const { type = 'text' } = defineProps<Props>();
+const props = withDefaults(
+	defineProps<Props>(), 
+	{ type: 'text' },
+);
 
 const emit = defineEmits<{ 
-	(e: 'update:modelValue', value: ReturnType<T>): void;
+	(e: 'update:modelValue', value: ReturnType<InputType>): void;
 }>();
 
 const onInput = (e: Event) => {
 	const inputValue = (e.target as HTMLInputElement).value;
-	const value = props.type === 'text' ? inputValue as ReturnType<T> : parseFloat(inputValue) as ReturnType<T>;
+	const value = type === 'text' ? inputValue as ReturnType<InputType> : parseFloat(inputValue) as ReturnType<InputType>;
 	emit('update:modelValue', value);
 }
 </script>

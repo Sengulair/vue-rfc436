@@ -1,11 +1,23 @@
 <script setup lang="ts">
-import AppInput from './components/AppInput.vue'
+import { ref } from 'vue';
 
-const update = (value: string) => {
+import AppInput from './components/AppInput.vue'
+import AppInputGeneric from './components/AppInputGeneric.vue'
+
+const string = ref('');
+const number = ref(0);
+const log = (value: string | number) => {
 	console.log(value);
 }
 </script>
 
 <template>
-  <AppInput :type="'text'" @update:modelValue="update" />
+  <AppInputGeneric :model-value="string" :type="'text'" @update:model-value="(arg) => log(arg)" />
+	<AppInputGeneric :model-value="string" :type="'text'" @update:modelValue="(arg) => log(arg)" />
+
+	<AppInputGeneric :model-value="number" type="number" @update:model-value="(arg) => log(arg)" />
+	<AppInputGeneric :model-value="number" type="number" @update:modelValue="(arg) => log(arg)" />
+
+	<AppInput :model-value="number" type="number" @update:model-value="(arg) => log(arg)" />
+	<AppInput :model-value="string" type="text" @update:modelValue="(arg) => log(arg)" />
 </template>
