@@ -12,8 +12,8 @@ const log = (value: string | number) => {
 </script>
 
 <template>
-  <AppInputGeneric :model-value="string" :type="'text'" @update:model-value="(arg) => log(arg)" />
-	<AppInputGeneric :model-value="string" :type="'text'" @update:modelValue="(arg) => log(arg)" />
+  <AppInputGeneric :model-value="string" type="text" @update:model-value="(arg) => log(arg)" />
+	<AppInputGeneric :model-value="string" type="text" @update:modelValue="(arg) => log(arg)" />
 
 	<AppInputGeneric :model-value="number" type="number" @update:model-value="(arg) => log(arg)" />
 	<AppInputGeneric :model-value="number" type="number" @update:modelValue="(arg) => log(arg)" />
